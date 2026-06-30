@@ -1,0 +1,17 @@
+#docker run --network allah --hostname djangosite -d Dockerfile
+#docker run --network allah -p 2004:80 --restart always -d my_nginx
+services:
+  nginx:
+    build: ./docker/nginx
+    ports:
+      - "2004:80"
+    restart: always
+    volumes:
+      - ./static:/var/www/html/static:ro
+
+  django-site:
+    build:
+      context: .
+      dockerfile: ./docker/django_site/Dockerfile
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3
