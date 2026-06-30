@@ -25,19 +25,25 @@ SECRET_KEY = 'django-insecure-a#g7rei$%dyfhd+svh-088^0uajj=s_(0*5_u_71hcs4z4qgsn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.0.151"]
+ALLOWED_HOSTS = ["salt-and-pepper-internship.duckdns.org",
+                 "django-site",
+                 "localhost",
+                 "127.0.0.1",
+                 "176.120.178.197",
+                 "192.168.0.151"
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main'
     
 ]
 
