@@ -1,0 +1,6 @@
+media/
+db.sqlite3
+models/__pycache__
+main/__pycache__
+models_app/__pycache__
+models_app/migrations/__pycache__
