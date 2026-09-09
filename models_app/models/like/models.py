@@ -1,7 +1,7 @@
-from models_app.post.models import Post
-from models_app.comment.models import Comment
-from models_app.timestamped.models import TimeStampedMixin
-from models_app.user.models import CustomUser
+from models_app.models.post.models import Post
+from models_app.models.comment.models import Comment
+from models_app.models.timestamped.models import TimeStampedMixin
+from models_app.models.user.models import CustomUser
 from django.db import models
 
 
