@@ -1,8 +1,10 @@
-FROM python:3.12-alpine
+FROM python:3.12-slim
 
 WORKDIR /app
 
 COPY requirements.txt .
+
+RUN apt-get update && apt-get install libpq5 -y
 
 RUN pip install -r requirements.txt
 

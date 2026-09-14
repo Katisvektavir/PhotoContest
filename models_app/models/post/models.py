@@ -1,5 +1,5 @@
-from models_app.timestamped.models import TimeStampedMixin
-from models_app.user.models import CustomUser
+from models_app.models.timestamped.models import TimeStampedMixin
+from models_app.models.user.models import CustomUser
 from django.db import models
 
 
