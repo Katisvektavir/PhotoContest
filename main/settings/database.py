@@ -4,11 +4,20 @@ from pathlib import Path
 load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+USER = os.getenv('DATABASE_USER')
+PASSWORD = os.getenv('DATABASE_PASSWORD')
+HOST = os.getenv('DATABASE_HOST')
+NAME = os.getenv('DATABASE_NAME')
 # Database
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': f'{BASE_DIR}/db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': NAME,
+        'USER': USER,
+        'PASSWORD': PASSWORD,
+        'HOST': HOST,
+        'PORT': '5432',
     }
 }
 
