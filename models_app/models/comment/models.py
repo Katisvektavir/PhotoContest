@@ -5,7 +5,32 @@ from django.db import models
 
 
 class Comment(TimeStampedMixin):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="comments", null=True, blank=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments", null=True, blank=True)
-    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE,
+        related_name="comments",
+        related_query_name="comment",
+        null=True,
+        blank=False
+    )
+
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="comments",
+        related_query_name="comment",
+        null=True,
+        blank=True
+    )
+
+    parent_comment = models.ForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now=True,
+        null=True,
+        blank=True
+    )
