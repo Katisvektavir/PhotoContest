@@ -6,8 +6,36 @@ from django.db import models
 
 
 class Like(TimeStampedMixin):
-    created_at = models.DateTimeField(auto_now=True, null=True, blank=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="likes", null=True, blank=True)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="likes", null=True, blank=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes", null=True, blank=True)
+    created_at = models.DateTimeField(
+        auto_now=True,
+        null=True,
+        blank=True
+    )
+
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name="likes",
+        related_query_name="like",
+        null=True,
+        blank=False
+    )
+
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+        related_name="likes",
+        related_query_name="like",
+        null=True,
+        blank=True
+    )
+
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="likes",
+        related_query_name="like",
+        null=True,
+        blank=True
+    )
 

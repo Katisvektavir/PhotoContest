@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+<dev class="wrapper">
+<header>
+    header
+</header>
+<main>
+    {% for user in user_with_photo %}
+        {% for photo in user.photos.all %}
+            <img src="{{ photo.image.url }}">
+        {% endfor %}
+    {% endfor %}
+</main>
+<footer>
+    Photocontest
+</footer>
+</dev>
+</body>
+</html>

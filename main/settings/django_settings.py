@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG').lower() == 'true'
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split()
@@ -17,7 +18,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'models_app.apps.ModelsConfig',
-    #'models_app.user'
 ]
 
 MIDDLEWARE = [
@@ -35,7 +35,9 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR + "/main/templates",
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
