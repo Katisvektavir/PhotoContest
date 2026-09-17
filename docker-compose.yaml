@@ -15,7 +15,8 @@ services:
     restart: always
     volumes:
       - ./static:/var/www/html/static:ro
-
+      - media_volume:/var/www/html/media:ro
+      
   django-site:
     build:
       context: .
@@ -29,6 +30,10 @@ services:
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: 5432
       ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+    volumes:
+      - media_volume:/app/media 
+
 
 volumes:
     postgres_data:
+    media_volume:
