@@ -3,7 +3,7 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
 
 <body>
@@ -12,10 +12,15 @@
     header
 </header>
 <main>
-    {% for user in user_with_photo %}
-        {% for photo in user.photos.all %}
+    {% for post in posts_time_sort %}
+    <dev class="post_box">
+        <dev class="post_images">
+        {% for photo in post.photos.all %}
             <img src="{{ photo.image.url }}">
         {% endfor %}
+        </dev>
+        <span class="post_text">{{ post.message }}</span>
+    </dev>
     {% endfor %}
 </main>
 <footer>

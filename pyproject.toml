@@ -12,7 +12,8 @@ dependencies = [
     "django (==4.2)",
     "django-bootstrap-v5 (>=1.0.11,<2.0.0)",
     "gunicorn (>=26.2.0,<27.0.0)",
-    "psycopg (==3.1.8)"
+    "psycopg (==3.1.8)",
+    "pillow (>=12.3.0,<13.0.0)",
 ]
 
 [tool.poetry]

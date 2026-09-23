@@ -9,6 +9,7 @@ echo "bd started"
 
 python manage.py migrate --noinput
 
-echo $@
+python manage.py collectstatic --noinput
 
 exec "$@"
+
