@@ -26,5 +26,5 @@ RUN  chmod +x /app/docker/django_site/entrypoint.sh
 
 ENTRYPOINT ["/app/docker/django_site/entrypoint.sh"]
 
-CMD gunicorn --workers 4 --bind 0.0.0.0:8000 main.wsgi
+CMD gunicorn --workers 1 --threads 4 --bind 0.0.0.0:8000 main.wsgi
 
