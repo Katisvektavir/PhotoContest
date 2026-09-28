@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG').lower() == 'true'
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split()
-
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(',')
 
 INSTALLED_APPS = [
     'bootstrap5',
@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'models_app.apps.ModelsConfig',
+    'api',
 ]
 
 MIDDLEWARE = [
