@@ -1,6 +1,16 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: postgres:16
+    command: >
+      postgres
+      -c shared_buffers=64MB
+      -c work_mem=2MB
+      -c maintenance_work_mem=16MB
+      -c effective_cache_size=128MB
+      -c max_connections=20
+      -c autovacuum_max_workers=1
+      -c wal_buffers=2MB
+      -c checkpoint_completion_target=0.9
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
