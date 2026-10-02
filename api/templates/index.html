@@ -1,31 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+{% load bootstrap5 %}
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts.css' %}">
+
+    {% bootstrap_css %}
 </head>
 
 <body>
-<dev class="wrapper">
+{% bootstrap_javascript %}
+<div class="wrapper">
 <header>
     header
 </header>
 <main>
     {% for post in posts_time_sort %}
-    <dev class="post_box">
-        <dev class="post_images">
-        {% for photo in post.photos.all %}
-            <img src="{{ photo.image.url }}">
-        {% endfor %}
-        </dev>
-        <span class="post_text">{{ post.message }}</span>
-    </dev>
+        <div class="post_box rounded-3 p-4 border" id="post_box">
+            <div class="post_images">
+            {% for photo in post.photos.all %}
+                <img class="post_photo" src="{{ photo.image.url }}" alt="{{ photo.name }}">
+            {% endfor %}
+            </div>
+            <span class="post_text bg-light rounded-2 border">{{ post.message }}</span>
+        </div>
     {% endfor %}
+
+    <div class="modal fade carousel slide" id="carousel_modal_window" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-transparent border-0 p-0 gap-3">
+                <img id="modal_image" class="img-fluid d-block align-self-center" src="" >
+                <span id="modal_text" class="align-self-center bg-light rounded-1 px-2"></span>
+            </div>
+        </div>
+    </div>
 </main>
 <footer>
     Photocontest
 </footer>
-</dev>
+</div>
+<script src="{% static 'scrypt.js' %}"></script>
 </body>
 </html>

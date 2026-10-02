@@ -16,6 +16,8 @@ RUN apt-get install zlib1g-dev -y --no-install-recommends
 
 RUN apt-get install libjpeg-dev -y --no-install-recommends
 
+RUN pip install pillow==12.3.0
+
 RUN pip install -r requirements.txt
 
 RUN apt-get install netcat-openbsd
