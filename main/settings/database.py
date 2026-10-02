@@ -1,24 +1,14 @@
 import os
-from dotenv import load_dotenv
-from pathlib import Path
-load_dotenv()
+from decouple import config
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-USER = os.getenv('DATABASE_USER')
-PASSWORD = os.getenv('DATABASE_PASSWORD')
-HOST = os.getenv('DATABASE_HOST')
-NAME = os.getenv('DATABASE_NAME')
+
 # Database
+DATABASE_URL = f"postgres://{config("DATABASE_USER")}:{config("DATABASE_PASSWORD")}@{config("DATABASE_HOST")}:5432/{config("DATABASE_NAME")}"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': NAME,
-        'USER': USER,
-        'PASSWORD': PASSWORD,
-        'HOST': HOST,
-        'PORT': '5432',
-    }
+    'default': dj_database_url.parse(DATABASE_URL)
 }
 
 
@@ -61,6 +51,8 @@ STATIC_ROOT = 'staticfiles/'
 STATICFILES_DIRS = [
     BASE_DIR + "/static",
     BASE_DIR + "/api/css",
+    BASE_DIR + "/api/js",
+    BASE_DIR + "/api/fonts",
     ]
 
 MEDIA_URL = 'media/'

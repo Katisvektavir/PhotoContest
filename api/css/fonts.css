@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Istok';
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("./IstokWeb-Regular.ttf") format('truetype');
+}
+
+span {
+  font-family: 'Istok';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
