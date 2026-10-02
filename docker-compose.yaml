@@ -1,17 +1,51 @@
-#docker run --network allah --hostname djangosite -d Dockerfile
-#docker run --network allah -p 2004:80 --restart always -d my_nginx
 services:
+  db:
+    image: postgres:16
+    command: >
+      postgres
+      -c shared_buffers=64MB
+      -c work_mem=2MB
+      -c maintenance_work_mem=16MB
+      -c effective_cache_size=128MB
+      -c max_connections=20
+      -c autovacuum_max_workers=1
+      -c wal_buffers=2MB
+      -c checkpoint_completion_target=0.9
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
   nginx:
     build: ./docker/nginx
     ports:
       - "2004:80"
     restart: always
     volumes:
-      - ./static:/var/www/html/static:ro
-
+      - static_volume:/var/www/html/static:ro
+      - media_volume:/var/www/html/media:ro
+      
   django-site:
     build:
       context: .
       dockerfile: ./docker/django_site/Dockerfile
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: 5432
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
     volumes:
-      - ./db.sqlite3:/app/db.sqlite3
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media 
+
+
+volumes:
+    static_volume:
+    postgres_data:
+    media_volume:
