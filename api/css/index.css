@@ -32,6 +32,13 @@ body {
 .post_box {
   display: flex;
   width: 100%;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.post_content {
+  display: flex;
+  width: 100%;
   gap: 100px;
   max-height: 800px;
 }
@@ -56,6 +63,15 @@ body {
 .post_text {
   flex: 1;
   display: flex;
+}
+
+.post_action {
+  display: flex;
+  align-items: center;
+}
+
+.post_action button {
+  width: fit-content;
 }
 
 .modal-content, .modal-dialog {
