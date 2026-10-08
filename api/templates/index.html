@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'index.css' %}">
     <link rel="stylesheet" href="{% static 'fonts.css' %}">
-
     {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -19,13 +19,27 @@
 <main>
     {% for post in posts_time_sort %}
         <div class="post_box rounded-3 p-4 border" id="post_box">
-            <div class="post_images">
-            {% for photo in post.photos.all %}
-                <img class="post_photo" src="{{ photo.image.url }}" alt="{{ photo.name }}">
-            {% endfor %}
+            <h2>{{ post.user.username }}</h2>
+            <div class="post_content">
+                <div class="post_images">
+                {% for photo in post.photos.all %}
+                    <img class="post_photo" src="{{ photo.image.url }}" alt="{{ photo.name }}">
+                {% endfor %}
+                </div>
+                <span class="post_text bg-light rounded-2 border">{{ post.message }}</span>
             </div>
-            <span class="post_text bg-light rounded-2 border">{{ post.message }}</span>
+            <div class="post_action">
+                <button class="btn btn-link text-danger" aria-label="Нравится" aria-pressed="false">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <span class="like_count">{{ post.likes.count }}</span>
+                <button class="btn btn-link text-secondary" aria-label="Комментарии">
+                    <i class="bi bi-chat-dots"></i>
+                </button>
+                <span class="comment_count">{{ post.comments.count }}</span>
+            </div>
         </div>
+
     {% endfor %}
 
     <div class="modal fade" id="carousel_modal_window" tabindex="-1">
