@@ -36,4 +36,6 @@ class Comment(TimeStampedMixin):
     )
 
     message = models.TextField(
+        null=False,
+        blank=False
     )

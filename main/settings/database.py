@@ -5,7 +5,7 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Database
-DATABASE_URL = f"postgres://{config("DATABASE_USER")}:{config("DATABASE_PASSWORD")}@{config("DATABASE_HOST")}:5432/{config("DATABASE_NAME")}"
+DATABASE_URL = f"postgres://{config('DATABASE_USER')}:{config('DATABASE_PASSWORD')}@{config('DATABASE_HOST')}:5432/{config('DATABASE_NAME')}"
 
 DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL)
