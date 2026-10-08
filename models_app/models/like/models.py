@@ -3,6 +3,7 @@ from models_app.models.comment.models import Comment
 from models_app.models.timestamped.models import TimeStampedMixin
 from models_app.models.user.models import CustomUser
 from django.db import models
+from django.db.models import Q
 
 
 class Like(TimeStampedMixin):
@@ -17,7 +18,7 @@ class Like(TimeStampedMixin):
         on_delete=models.CASCADE,
         related_name="likes",
         related_query_name="like",
-        null=True,
+        null=False,
         blank=False
     )
 
@@ -38,4 +39,26 @@ class Like(TimeStampedMixin):
         null=True,
         blank=True
     )
+
+    def __str__(self):
+        return str(self.user) + str(self.post)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                check=(
+                        Q(post__isnull=False, comment__isnull=True)
+                        | Q(post__isnull=True, comment__isnull=False)
+                ),
+                name="like_exactly_one_target",
+            ),
+            models.UniqueConstraint(
+                fields=["user", "post"],
+                name="unique_user_post_like",
+            ),
+            models.UniqueConstraint(
+                fields=["user", "comment"],
+                name="unique_user_comment_like",
+            ),
+        ]
 
