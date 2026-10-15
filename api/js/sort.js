@@ -1,11 +1,10 @@
 function sortHandler() {
     const sort = $(this).data('sort');
     $.ajax({
-        url: '/posts/sort/',       // ваш URL эндпоинта
+        url: '/posts/sort/',
         method: 'GET',
         data: { sort: sort },
         success: function (html) {
-            // html — это отрендеренный _posts_list.html
             $('#posts_container').html(html);
             }
         });

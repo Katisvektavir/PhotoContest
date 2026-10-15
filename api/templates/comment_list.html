@@ -1,0 +1,32 @@
+{% for comment in commentaries %}
+    <div class="first_comment">
+        <span>{{ comment.user.username }}</span>
+        <span>{{ comment.message }}</span>
+        <div class="post_action">
+            <button class="btn btn-link text-danger" aria-label="Нравится" aria-pressed="false">
+                <i class="bi bi-heart"></i>
+            </button>
+            <span class="like_count">{{ post.likes.count }}</span>
+            <button class="btn btn-link text-secondary" aria-label="Комментарии">
+                <i class="bi bi-chat-dots"></i>
+            </button>
+            <span class="comment_count">{{ post.comments.count }}</span>
+        </div>
+    </div>
+    {% for comment_son in comment.comments.all %}
+        <div class="second_comment">
+            <span>{{ comment.user.username }}</span>
+            <span>{{ comment.message }}</span>
+            <div class="post_action">
+                <button class="btn btn-link text-danger" aria-label="Нравится" aria-pressed="false">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <span class="like_count">{{ post.likes.count }}</span>
+                <button class="btn btn-link text-secondary" aria-label="Комментарии">
+                    <i class="bi bi-chat-dots"></i>
+                </button>
+                <span class="comment_count">{{ post.comments.count }}</span>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}

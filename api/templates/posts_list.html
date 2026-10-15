@@ -14,10 +14,12 @@
                     <i class="bi bi-heart"></i>
                 </button>
                 <span class="like_count">{{ post.likes.count }}</span>
-                <button class="btn btn-link text-secondary" aria-label="Комментарии">
+                <button class="btn btn-link text-secondary comments-btn" data-post-id="{{ post.id }}" aria-label="Комментарии">
                     <i class="bi bi-chat-dots"></i>
                 </button>
                 <span class="comment_count">{{ post.comments.count }}</span>
+            </div>
+            <div class="comment_box" id="comments-{{ post.id }}">
             </div>
         </div>
 {% endfor %}
