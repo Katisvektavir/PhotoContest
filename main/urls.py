@@ -17,8 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from api.views.main_views import MainViews
-
+from api.views.post_sort_view import PostsSortView
 urlpatterns = [
     path('', MainViews.as_view(), name="index"),
+    path('posts/sort/', PostsSortView.as_view(), name='posts_sort'),
     path('admin/', admin.site.urls),
 ]

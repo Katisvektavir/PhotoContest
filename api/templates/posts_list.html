@@ -1,0 +1,23 @@
+{% for post in posts %}
+        <div class="post_box rounded-3 p-4 border" id="post_box">
+            <h2>{{ post.user.username }}</h2>
+            <div class="post_content">
+                <div class="post_images">
+                {% for photo in post.photos.all %}
+                    <img class="post_photo" src="{{ photo.image.url }}" alt="{{ photo.name }}">
+                {% endfor %}
+                </div>
+                <span class="post_text bg-light rounded-2 border">{{ post.message }}</span>
+            </div>
+            <div class="post_action">
+                <button class="btn btn-link text-danger" aria-label="Нравится" aria-pressed="false">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <span class="like_count">{{ post.likes.count }}</span>
+                <button class="btn btn-link text-secondary" aria-label="Комментарии">
+                    <i class="bi bi-chat-dots"></i>
+                </button>
+                <span class="comment_count">{{ post.comments.count }}</span>
+            </div>
+        </div>
+{% endfor %}
