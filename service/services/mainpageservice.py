@@ -9,5 +9,5 @@ class MainPageService(Service):
 
         return {
             'user_with_photo' : user_with_photo,
-            'posts_time_sort' : posts_time_sort,
+            'posts' : posts_time_sort,
         }
