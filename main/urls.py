@@ -18,8 +18,11 @@ from django.contrib import admin
 from django.urls import path
 from api.views.main_views import MainViews
 from api.views.post_sort_view import PostsSortView
+from api.views.comment_list_view import CommentListView
+
 urlpatterns = [
-    path('', MainViews.as_view(), name="index"),
+    path('', MainViews.as_view(), name='index'),
     path('posts/sort/', PostsSortView.as_view(), name='posts_sort'),
+    path('posts/<int:post_id>/comments/', CommentListView.as_view(), name='post_comments'),
     path('admin/', admin.site.urls),
 ]

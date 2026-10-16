@@ -24,6 +24,7 @@ class Comment(TimeStampedMixin):
 
     parent_comment = models.ForeignKey(
         'self',
+        related_name='comments',
         on_delete=models.CASCADE,
         null=True,
         blank=True
