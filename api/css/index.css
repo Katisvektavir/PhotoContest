@@ -77,3 +77,15 @@ body {
 .modal-content, .modal-dialog {
   width: fit-content !important;
 }
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 20px;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: white;
+}

@@ -31,7 +31,8 @@ class Photo(TimeStampedMixin):
 
     image = models.ImageField(
         null=True,
-        blank=True
+        blank=True,
+        upload_to="posts/",
     )
 
     def __str__(self):
