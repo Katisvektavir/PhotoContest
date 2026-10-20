@@ -19,9 +19,13 @@
 {% bootstrap_javascript %}
 <div class="wrapper">
 <header>
-    <div>
-        <button class="sort-btn" data-sort="date">По дате</button>
-        <button class="sort-btn" data-sort="like">По лайкам</button>
+    <div class="user_box">
+        {% include "user_label.html" %}
+    </div>
+    <div class="sort_box">
+        <span>Сортировать посты </span>
+        <button class="sort-btn btn btn-primary" data-sort="date">По дате</button>
+        <button class="sort-btn btn btn-primary" data-sort="like">По лайкам</button>
     </div>
 </header>
 <main>
