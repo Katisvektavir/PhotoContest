@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'models_app.apps.ModelsConfig',
     'service_objects',
     'api',
-    'service',
+    'authentification',
 ]
 
 MIDDLEWARE = [
@@ -51,3 +51,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login'

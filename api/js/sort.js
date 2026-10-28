@@ -13,5 +13,3 @@ function sortHandler() {
 $(document).ready(function (){
     $(".sort-btn").on("click", sortHandler)
 })
-
-

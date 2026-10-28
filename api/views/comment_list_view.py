@@ -1,7 +1,7 @@
 from django.views import View
 from django.shortcuts import render
 from models_app.models.post.models import Post
-from service.services.commentlistservice import CommentListService
+from api.services.commentlistservice import CommentListService
 
 class CommentListView(View):
     def get(self, request, post_id):

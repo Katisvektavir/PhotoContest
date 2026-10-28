@@ -1,18 +1,18 @@
 const imageModalEl = document.getElementById('carousel_modal_window');
-const imageModal = document.getElementById('modal_image')
-const textModal = document.getElementById('modal_text')
+const imageModal = document.getElementById('modal_image');
+const textModal = document.getElementById('modal_text');
 const imageModalWindow = new bootstrap.Modal(imageModalEl);
 
 
 function ClickHandler(event) {
-    obj = event.target.closest('.post_photo');
+    let obj = event.target.closest('.post_photo');
     if (!obj) {
         return;
     }
 
     imageModal.src = obj.src;
     imageModalWindow.show();
-    if (obj.alt.trim() && obj.alt != "None") {
+    if (obj.alt.trim() && obj.alt !== "None") {
         textModal.hidden = false;
         textModal.textContent = obj.alt;
     }
@@ -21,8 +21,6 @@ function ClickHandler(event) {
     }
 }
 
-let HandlerBox = document.querySelectorAll('.post_box');
+let HandlerBox = document.getElementById('posts_container');
 
-HandlerBox.forEach((item) =>{
-    item.addEventListener('click', ClickHandler);
-}) ;
+HandlerBox.addEventListener('click', ClickHandler);
