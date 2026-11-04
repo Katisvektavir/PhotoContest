@@ -68,10 +68,16 @@ body {
 .post_action {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  width: 30%;
 }
 
 .post_action button {
   width: fit-content;
+}
+
+.post_action .comment-form {
+    flex-basis: 100%;
 }
 
 .modal-content, .modal-dialog {
@@ -88,4 +94,8 @@ header {
   position: sticky;
   top: 0;
   background: white;
+}
+
+.second_comment {
+  padding: 15px;
 }

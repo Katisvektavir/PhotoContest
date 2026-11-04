@@ -19,13 +19,17 @@ from django.urls import path
 from api.views.main_views import MainViews
 from api.views.post_sort_view import PostsSortView
 from api.views.comment_list_view import CommentListView
+from api.views.like_toggle_view import PostLikeView, CommentLikeView
 from django.contrib.auth import views as auth_views
-
+from api.views.comment_create_view import CommentCreateView
 
 urlpatterns = [
     path('', MainViews.as_view(), name='index'),
     path('posts/sort/', PostsSortView.as_view(), name='posts_sort'),
     path('posts/<int:post_id>/comments/', CommentListView.as_view(), name='post_comments'),
+    path('posts/<int:post_id>/comments/add/', CommentCreateView.as_view(), name='add_post_comments'),
+    path('posts/<int:post_id>/like/', PostLikeView.as_view(), name='post_like'),
+    path('comments/<int:comment_id>/like/', CommentLikeView.as_view(), name='comment_like'),
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(template_name="login.html"), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

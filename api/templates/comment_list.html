@@ -3,29 +3,56 @@
         <span>{{ comment.user.username }}</span>
         <span>{{ comment.message }}</span>
         <div class="post_action">
-            <button class="btn btn-link text-danger" aria-label="Нравится" aria-pressed="false">
+            <button class="btn btn-link text-danger like-comment-btn"
+                    aria-label="Нравится"
+                    aria-pressed="false"
+                    data-comment-id="{{ comment.id }}"
+                    id="comment-{{ comment.id }}"
+            >
                 <i class="bi bi-heart"></i>
             </button>
-            <span class="like_count">{{ post.likes.count }}</span>
+            <span class="like_count">{{ comment.likes.count }}</span>
             <button class="btn btn-link text-secondary" aria-label="Комментарии">
                 <i class="bi bi-chat-dots"></i>
             </button>
-            <span class="comment_count">{{ post.comments.count }}</span>
+            <span class="comment_count">{{ comment.comments.count }}</span>
+            <button class="btn btn-link text-secondary comments-write-btn"
+                    data-comment-id="{{ comment.id }}"
+                    data-post-id="{{ comment.post_id }}"
+                    data-target="#comment-form-{{ comment.id }}"
+                    aria-label="Написать комментарий">
+                <i class="bi bi-pencil"></i>
+            </button>
+            <form class="comment-form d-none"
+                  id="comment-form-{{ comment.id }}"
+                  data-post-id="{{ comment.post_id }}"
+                  method="post">
+            {% csrf_token %}
+            <textarea name="message" class="form-control" rows="2"
+                      placeholder="Ответ на комментарий..."></textarea>
+            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+            <button type="submit" class="btn btn-primary btn-sm mt-2">Отправить</button>
+        </form>
         </div>
     </div>
     {% for comment_son in comment.comments.all %}
         <div class="second_comment">
-            <span>{{ comment.user.username }}</span>
-            <span>{{ comment.message }}</span>
+            <span>{{ comment_son.user.username }}</span>
+            <span>{{ comment_son.message }}</span>
             <div class="post_action">
-                <button class="btn btn-link text-danger" aria-label="Нравится" aria-pressed="false">
+                <button class="btn btn-link text-danger like-comment-btn"
+                        aria-label="Нравится"
+                        aria-pressed="false"
+                        data-comment-id="{{ comment_son.id }}"
+                        id="comment-{{ comment_son.id }}"
+                >
                     <i class="bi bi-heart"></i>
                 </button>
-                <span class="like_count">{{ post.likes.count }}</span>
+                <span class="like_count">{{ comment_son.likes.count }}</span>
                 <button class="btn btn-link text-secondary" aria-label="Комментарии">
                     <i class="bi bi-chat-dots"></i>
                 </button>
-                <span class="comment_count">{{ post.comments.count }}</span>
+                <span class="comment_count">{{ comment_son.comments.count }}</span>
             </div>
         </div>
     {% endfor %}
