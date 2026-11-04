@@ -22,5 +22,4 @@ function ClickHandler(event) {
 }
 
 let HandlerBox = document.getElementById('posts_container');
-
 HandlerBox.addEventListener('click', ClickHandler);
