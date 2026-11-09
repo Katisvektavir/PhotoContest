@@ -4,14 +4,23 @@ from models_app.models.user.models import CustomUser
 from django.db import models
 
 
+def photo_directory_path(instance, filename):
+    if instance.is_avatar:
+        return f"user_{instance.user_id}/avatars/{filename}"
+    elif instance.post_id:
+        return f"posts/{filename}"
+    else:
+        return f"user_{instance.user_id}/{filename}"
+
+
 class Photo(TimeStampedMixin):
     user = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
         related_name="photos",
         related_query_name="photo",
-        null=True,
-        blank=True
+        null=False,
+        blank=False
     )
 
     post = models.ForeignKey(
@@ -32,8 +41,9 @@ class Photo(TimeStampedMixin):
     image = models.ImageField(
         null=True,
         blank=True,
-        upload_to="posts/",
+        upload_to=photo_directory_path,
     )
 
+    is_avatar = models.BooleanField()
     def __str__(self):
         return str(self.name)
