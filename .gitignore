@@ -6,4 +6,4 @@ __pycache__/
 staticfiles/
 static/admin/*
 static/*
-!static/default_avatat.png
+!static/default_avatar.png
