@@ -17,8 +17,16 @@ function togglePostLike() {
             const icon = likeBtn.find('i');
             icon.toggleClass('bi-heart', !data.liked);
             icon.toggleClass('bi-heart-fill', data.liked);
+            },
+        error: function (err){
+            if (err.status == 401){
+                window.location.href = '/login/?next=' + encodeURIComponent(window.location.pathname);
             }
-        });
+            else {
+                console.error('Ошибка:', err.status);
+            }
+        }
+    });
 }
 
 function toggleCommentLike(){
@@ -34,8 +42,16 @@ function toggleCommentLike(){
             const icon = comment.find('i');
             icon.toggleClass('bi-heart', !data.liked);
             icon.toggleClass('bi-heart-fill', data.liked);
+            },
+        error: function (err){
+            if (err.status == 401){
+                window.location.href = '/login/?next=' + encodeURIComponent(window.location.pathname);
             }
-        });
+            else {
+                console.error('Ошибка:', err.status);
+            }
+        }
+    });
 }
 
 $(document).ready(function (){

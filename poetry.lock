@@ -79,6 +79,21 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-appconf"
+version = "1.2.0"
+description = "A helper class for handling configuration defaults of packaged apps gracefully."
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "django_appconf-1.2.0-py3-none-any.whl", hash = "sha256:b81bce5ef0ceb9d84df48dfb623a32235d941c78cc5e45dbb6947f154ea277f4"},
+    {file = "django_appconf-1.2.0.tar.gz", hash = "sha256:15a88d60dd942d6059f467412fe4581db632ef03018a3c183fb415d6fc9e5cec"},
+]
+
+[package.dependencies]
+django = "*"
+
+[[package]]
 name = "django-bootstrap-v5"
 version = "1.0.11"
 description = "Bootstrap 5 support for Django projects"
@@ -96,6 +111,28 @@ django = ">=2.2,<5.0"
 
 [package.extras]
 docs = ["m2r2 (>=0.2.5,<0.3.0)", "sphinx (>=4.4,<5.0)", "sphinx_rtd_theme (>=1.0,<2.0)"]
+
+[[package]]
+name = "django-imagekit"
+version = "6.1.1"
+description = "Automated image processing for Django models."
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "django_imagekit-6.1.1-py3-none-any.whl", hash = "sha256:211765099e1c435c2b1d4664621c7cdf91aa0a3394de8fc1053b89e468000d53"},
+    {file = "django_imagekit-6.1.1.tar.gz", hash = "sha256:3d254c163fda1aeb163ea2c79399f9892c12a0c2ce881059e450ad7fe930a017"},
+]
+
+[package.dependencies]
+django-appconf = "*"
+pilkit = "*"
+
+[package.extras]
+async = ["django-celery (>=3.0)"]
+async-dramatiq = ["django-dramatiq (>=0.4.0)"]
+async-rq = ["django-rq (>=0.6.0)"]
+test = ["Pillow", "beautifulsoup4", "pytest", "pytest-cov", "pytest-django"]
 
 [[package]]
 name = "django-service-objects"
@@ -147,6 +184,21 @@ http2 = ["h2 (>=4.4.1)"]
 setproctitle = ["setproctitle"]
 testing = ["coverage", "gevent (>=24.10.1)", "h2 (>=4.4.1)", "httpx[http2] (>=0.23.0)", "inotify (>=0.2.10) ; sys_platform == \"linux\"", "packaging", "pytest (>=9.0.3)", "pytest-asyncio", "pytest-cov", "uvloop (>=0.19.0)"]
 tornado = ["tornado (>=6.5.7)"]
+
+[[package]]
+name = "pilkit"
+version = "3.0"
+description = "A collection of utilities and processors for the Python Imaging Library."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "pilkit-3.0-py3-none-any.whl", hash = "sha256:fe1707b0411a1d0cbf9ad3986779fa5a346cec4582a188740924aa39f504d117"},
+    {file = "pilkit-3.0.tar.gz", hash = "sha256:f6719e8cc0482e5447f5cb94f18b949d8e604ea9673a9b019c74d41b779e4eab"},
+]
+
+[package.dependencies]
+Pillow = ">=7.0"
 
 [[package]]
 name = "pillow"
@@ -372,4 +424,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10, <4.0"
-content-hash = "92a910429ccbed9ed6bda986b5a125f5b4d4fbe4876180b69dc813acd1579fe1"
+content-hash = "dfbbda71a7558969df611e51792e3699e751fac66932314b229c0c031bfe32a3"

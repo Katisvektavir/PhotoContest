@@ -1,6 +1,11 @@
 {% if user.is_authenticated %}
-    <a>{{ user.username }}</a>
-    <a href="/logout">logout</a>
+    <a href="/user" class="text-decoration-none">
+        <img class="header_user_avatar" src="{{ user.avatar_url }}">
+    </a>
+    <a class="text-decoration-none" href="/user">{{ user.username }}</a>
+    <a href="/logout" class="text-decoration-none">
+        <i class="bi bi-door-open"></i>
+    </a>
 {% else %}
     <a href="/login">you are not login</a>
 {% endif %}

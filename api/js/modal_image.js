@@ -10,7 +10,7 @@ function ClickHandler(event) {
         return;
     }
 
-    imageModal.src = obj.src;
+    imageModal.src = obj.dataset.originalUrl;
     imageModalWindow.show();
     if (obj.alt.trim() && obj.alt !== "None") {
         textModal.hidden = false;

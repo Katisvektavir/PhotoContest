@@ -1,0 +1,16 @@
+main {
+    display: flex;
+    width: 100%;
+}
+
+.user_profile {
+    flex: 1;
+}
+
+.user_media {
+    flex: 4;
+}
+
+.header_user_avatar {
+  max-width: 200px;
+}

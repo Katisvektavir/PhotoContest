@@ -4,7 +4,7 @@
 {% load bootstrap5 %}
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'main_page.css' %}">
     <link rel="stylesheet" href="{% static 'fonts.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
@@ -14,6 +14,7 @@
     <script src="{% static 'comment_list.js' %}"></script>
     <script src="{% static 'like.js' %}"></script>
     <script src="{% static 'add_comment.js' %}"></script>
+    <script src="{% static 'get_new_posts.js' %}"></script>
 </head>
 
 <body>
@@ -33,6 +34,13 @@
     <div id="posts_container">
         {% include "posts_list.html" %}
     </div>
+    {% if has_next %}
+        <div class="text-center my-4">
+            <button id="load-more-btn" class="btn btn-outline-primary" data-next-page="{{ next_page_number }}">
+                Загрузить еще
+            </button>
+        </div>
+    {% endif %}
     <div class="modal fade" id="carousel_modal_window" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content bg-transparent border-0 p-0 gap-3">

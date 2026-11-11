@@ -5,6 +5,9 @@ from django.views import View
 
 
 class PostLikeView(LoginRequiredMixin, View):
+    def handle_no_permission(self):
+        return JsonResponse({'error': 'auth required'}, status=401)
+
     def post(self, request, post_id):
         result = ToggleLikeService.execute({
             'post_id': post_id,
@@ -13,9 +16,12 @@ class PostLikeView(LoginRequiredMixin, View):
         return JsonResponse(result)
 
 class CommentLikeView(LoginRequiredMixin, View):
-        def post(self, request, comment_id):
-            result = ToggleLikeService.execute({
-                'user': request.user,
-                'comment_id': comment_id,
-            })
-            return JsonResponse(result)
+    def handle_no_permission(self):
+        return JsonResponse({'error': 'auth required'}, status=401)
+
+    def post(self, request, comment_id):
+        result = ToggleLikeService.execute({
+            'user': request.user,
+            'comment_id': comment_id,
+        })
+        return JsonResponse(result)

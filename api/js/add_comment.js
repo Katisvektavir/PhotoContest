@@ -25,6 +25,14 @@ function submitComment(event) {
             form.addClass('d-none');
             $('#comments-' + post_id).html(data.html);
             $('#post-' + post_id).find('.comment_count_post').text(data.comments_count);
+        },
+        error: function (err){
+            if (err.status == 401){
+                window.location.href = '/login/?next=' + encodeURIComponent(window.location.pathname);
+            }
+            else {
+                console.error('Ошибка:', err.status);
+            }
         }
     });
 }
