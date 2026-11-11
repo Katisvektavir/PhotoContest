@@ -1,7 +1,10 @@
 from models_app.models.post.models import Post
 from models_app.models.timestamped.models import TimeStampedMixin
 from models_app.models.user.models import CustomUser
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 from django.db import models
+
 
 
 def photo_directory_path(instance, filename):
@@ -47,3 +50,10 @@ class Photo(TimeStampedMixin):
     is_avatar = models.BooleanField()
     def __str__(self):
         return str(self.name)
+
+    thumbnail = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(300, 300)],
+        format='JPEG',
+        options={'quality': 80}
+    )

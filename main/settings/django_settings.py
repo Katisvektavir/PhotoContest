@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'service_objects',
     'api',
     'authentification',
+    'imagekit',
 ]
 
 MIDDLEWARE = [

@@ -2,6 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import JsonResponse
+from models_app.models.photo.models import Photo
 from api.services.user_page_services import CabinetDataService, CreatePostService, UploadPhotoService
 
 
@@ -9,22 +11,30 @@ class UserPageView(LoginRequiredMixin, View):
     template_name = 'user_page.html'
 
     def get(self, request):
-        # Получаем данные для всех вкладок через сервис
         context = CabinetDataService.execute({'user': request.user})
         return render(request, self.template_name, context)
 
     def post(self, request):
-        # Определяем, какую форму отправил пользователь (по name кнопки)
+        print("REQUEST", request)
+        print("POSTT", request.POST)
         if 'create_post' in request.POST:
-            service = CreatePostService({
+            post = CreatePostService.execute({
                 'user': request.user,
-                'message': request.POST.get('message'),
-                'images': request.FILES.getlist('images')  # Если фото несколько
+                'message': request.POST.get('message', '').strip(),
             })
-            if service.is_valid():
-                service.process()
+
+            if post:
+                images = request.FILES.getlist('images')
+
+                for img in images:
+                    Photo.objects.create(
+                        user=request.user,
+                        post=post,
+                        image=img,
+                        is_avatar=False
+                    )
                 messages.success(request, "Пост успешно создан и отправлен на модерацию!")
-                return redirect('cabinet')
+                return redirect('/user')
             else:
                 messages.error(request, "Ошибка при создании поста. Проверьте данные.")
 
@@ -37,10 +47,9 @@ class UserPageView(LoginRequiredMixin, View):
             if service.is_valid():
                 service.process()
                 messages.success(request, "Фото загружено!")
-                return redirect('cabinet')
+                return redirect('/user')
             else:
                 messages.error(request, "Ошибка при загрузке фото.")
 
-        # Если форма невалидна — рендерим страницу заново (с ошибками)
         context = CabinetDataService.execute({'user': request.user})
         return render(request, self.template_name, context)

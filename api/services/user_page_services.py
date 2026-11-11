@@ -1,5 +1,7 @@
 from service_objects.services import Service
 from service_objects.fields import ModelField
+from api.forms.post_form.forms import PostForm
+from api.forms.photo_form.forms import PhotoForm
 from models_app.models.user.models import CustomUser
 from models_app.models.post.models import Post
 from models_app.models.photo.models import Photo
@@ -16,6 +18,8 @@ class CabinetDataService(Service):
         return {
             'posts': posts,
             'user_photos': user_photos,
+            'post_form': PostForm(),
+            'photo_form': PhotoForm(),
         }
 
 class CreatePostService(Service):
@@ -37,7 +41,6 @@ class CreatePostService(Service):
                 image=image,
                 is_avatar=False
             )
-
         return post
 
 class UploadPhotoService(Service):

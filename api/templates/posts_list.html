@@ -4,7 +4,7 @@
             <div class="post_content">
                 <div class="post_images">
                 {% for photo in post.photos.all %}
-                    <img class="post_photo" src="{{ photo.image.url }}" alt="{{ photo.name }}">
+                    <img class="post_photo" src="{{ photo.thumbnail.url }}" alt="{{ photo.name }}" data-original-url="{{ photo.image.url }}">
                 {% endfor %}
                 </div>
                 <span class="post_text bg-light rounded-2 border">{{ post.message }}</span>
