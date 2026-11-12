@@ -6,6 +6,8 @@ from models_app.models.user.models import CustomUser
 from models_app.models.post.models import Post
 from models_app.models.photo.models import Photo
 from django import forms
+from api.utils.images import is_valid_image
+
 
 class CabinetDataService(Service):
     user = ModelField(CustomUser)
@@ -48,7 +50,16 @@ class UploadPhotoService(Service):
     image = forms.ImageField()
     is_avatar = forms.BooleanField(required=False)
 
+    def clean_image(self):
+        image = self.cleaned_data['image']
+        if not is_valid_image(image):
+            raise forms.ValidationError(
+                "Файл повреждён или загружен не полностью. Попробуйте ещё раз."
+            )
+        return image
+
     def process(self):
+
         photo = Photo.objects.create(
             user=self.cleaned_data['user'],
             image=self.cleaned_data['image'],

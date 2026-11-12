@@ -19,6 +19,11 @@
     <div class="user_profile">
         <img class="header_user_avatar" src="{{ user.avatar_url }}">
         <span>{{ user.username }}</span>
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
     </div>
     <div class="user_media">
         <div class="container mt-4 navigation_tab">
