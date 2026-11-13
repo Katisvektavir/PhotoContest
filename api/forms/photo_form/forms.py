@@ -9,7 +9,7 @@ class PhotoForm(forms.ModelForm):
         widgets = {
             'image': forms.FileInput(attrs={'class': 'form-control'}),
             'name': forms.Textarea(attrs={'class': 'form-control', 'rows': 1}),
-            'is_avatar': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'is_avatar ': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
         labels = {
             'image': 'Выберите картинку',

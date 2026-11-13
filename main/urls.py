@@ -23,6 +23,7 @@ from api.views.like_toggle_view import PostLikeView, CommentLikeView
 from django.contrib.auth import views as auth_views
 from api.views.comment_create_view import CommentCreateView
 from api.views.user_page_view import UserPageView
+from authentification.views.register_view import RegisterView
 
 
 urlpatterns = [
@@ -36,4 +37,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(template_name="login.html"), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('register/', RegisterView.as_view(), name='register'),
 ]
