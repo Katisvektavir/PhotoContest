@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Регистрация</h2>
+
+{% if messages %}
+  {% for m in messages %}
+    <div class="alert alert-{{ m.tags }}">{{ m }}</div>
+  {% endfor %}
+{% endif %}
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+</form>
+
+<p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+</body>
+</html>
