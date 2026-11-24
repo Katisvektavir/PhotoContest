@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from api.views.main_views import MainViews
 from api.views.post_sort_view import PostsSortView
 from api.views.comment_list_view import CommentListView
@@ -35,7 +35,5 @@ urlpatterns = [
     path('posts/<int:post_id>/like/', PostLikeView.as_view(), name='post_like'),
     path('comments/<int:comment_id>/like/', CommentLikeView.as_view(), name='comment_like'),
     path('admin/', admin.site.urls),
-    path('login/', auth_views.LoginView.as_view(template_name="login.html"), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('register/', RegisterView.as_view(), name='register'),
+    path('', include('authentification.urls')),
 ]

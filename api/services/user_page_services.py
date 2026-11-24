@@ -5,6 +5,7 @@ from api.forms.photo_form.forms import PhotoForm
 from models_app.models.user.models import CustomUser
 from models_app.models.post.models import Post
 from models_app.models.photo.models import Photo
+from django.db import transaction, models
 from django import forms
 from api.utils.images import is_valid_image
 
@@ -24,19 +25,30 @@ class CabinetDataService(Service):
             'photo_form': PhotoForm(),
         }
 
+
 class CreatePostService(Service):
     user = ModelField(CustomUser)
     message = forms.CharField(max_length=2000)
-    images = forms.FileField(required=False)
 
+    def clean(self):
+        cleaned = super().clean()
+        images = self.files.getlist('images') if self.files else []
+        for image in images:
+            if not is_valid_image(image):
+                raise forms.ValidationError(
+                    f"Файл «{getattr(image, 'name', '?')}» повреждён "
+                    f"или не является изображением. Пост не создан."
+                )
+        self._images = images
+        return cleaned
+
+    @transaction.atomic
     def process(self):
         post = Post.objects.create(
             user=self.cleaned_data['user'],
             message=self.cleaned_data['message']
         )
-
-        image = self.cleaned_data.get('images')
-        if image:
+        for image in self._images:
             Photo.objects.create(
                 user=self.cleaned_data['user'],
                 post=post,
