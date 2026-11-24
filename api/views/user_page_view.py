@@ -17,36 +17,21 @@ class UserPageView(LoginRequiredMixin, View):
 
     def post(self, request):
         if 'create_post' in request.POST:
-            post = CreatePostService.execute({
+            service = CreatePostService(
+                data = {
                 'user': request.user,
                 'message': request.POST.get('message', '').strip(),
-            })
-
-            if post:
-                images = request.FILES.getlist('images')
-                skipped = 0
-
-                for img in images:
-                    if not is_valid_image(img):
-                        skipped += 1
-                        continue
-
-                    Photo.objects.create(
-                        user=request.user,
-                        post=post,
-                        image=img,
-                        is_avatar=False
-                    )
-                if skipped:
-                    messages.warning(
-                        request,
-                        f"{skipped} файл(ов) не сохранено: повреждены. "
-                        f"Попробуйте загрузить их снова."
-                    )
-                messages.success(request, "Пост успешно создан и отправлен на модерацию!")
-                return redirect('/user')
+                },
+                files = request.FILES,
+            )
+            if service.is_valid():
+                service.process()
+                messages.success(request, "Пост создан и отправлен на модерацию!")
             else:
-                messages.error(request, "Ошибка при создании поста. Проверьте данные.")
+                for errs in service.errors.values():
+                    for err in errs:
+                        messages.error(request, str(err))
+            return redirect('/user')
 
         elif 'upload_photo' in request.POST:
             service = UploadPhotoService(

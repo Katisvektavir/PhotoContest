@@ -1,9 +1,9 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from authentification.forms.register_form.forms import RegisterForm
+from authentification.forms.register_form import RegisterForm
 
 
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'register.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('authentification:login')
