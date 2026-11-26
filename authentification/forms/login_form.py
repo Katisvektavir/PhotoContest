@@ -1,8 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
 
-
-class LoginForm(AuthenticationForm):
+class LoginForm(forms.Form):
     username = forms.CharField(
         label='Логин',
         widget=forms.TextInput(attrs={'class': 'form-control', 'autofocus': True}),
