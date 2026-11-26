@@ -1,6 +1,13 @@
-from django.contrib.auth.views import LogoutView as DjangoLogoutView
 from django.urls import reverse_lazy
+from django.views import View
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.http import HttpResponseNotAllowed
 
+class LogoutView(View):
+    def post(self, request):
+        logout(request)
+        return redirect('authentification:login')
 
-class LogoutView(DjangoLogoutView):
-    next_page = reverse_lazy('authentification:login')
+    def get(self, request):
+        return redirect('authentification:login')
