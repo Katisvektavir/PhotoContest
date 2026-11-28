@@ -3,9 +3,12 @@
         <img class="header_user_avatar" src="{{ user.avatar_url }}">
     </a>
     <a class="text-decoration-none" href="/user">{{ user.username }}</a>
-    <a href="/logout" class="text-decoration-none">
-        <i class="bi bi-door-open"></i>
-    </a>
+    <form method="post" action="{% url 'authentification:logout' %}" class="d-inline">
+    {% csrf_token %}
+        <button type="submit" class="btn btn-link text-decoration-none p-0 text-secondary" title="Выйти">
+            <i class="bi bi-door-open"></i>
+        </button>
+    </form>
 {% else %}
-    <a href="/login">you are not login</a>
+    <a href="/login">Войти!</a>
 {% endif %}
