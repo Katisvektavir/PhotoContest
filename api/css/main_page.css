@@ -44,8 +44,8 @@ body {
 .post_content {
   display: flex;
   width: 100%;
-  gap: 100px;
-  max-height: 800px;
+  gap: 20px;
+  flex-direction: column;
 }
 
 .post_images {
@@ -75,7 +75,6 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  width: 30%;
 }
 
 .post_action button {
@@ -93,13 +92,13 @@ body {
 header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row-reverse;
   height: 80px;
   padding: 0 20px;
-  align-items: center;
   position: sticky;
   top: 0;
   background: white;
+  gap: 12px;
 }
 
 .second_comment {
@@ -112,4 +111,19 @@ header {
 
 .header_user_avatar {
     max-height: 100%;
+}
+
+.comment_box {
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding-right: 4px;
+}
+
+.post_footer {
+  height: 260px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
 }
